@@ -41,12 +41,15 @@ namespace Fitness.BL.Controller
         /// Get user data
         /// </summary>
         /// <returns>Application user</returns>
-        public User Load()
+        public UserController()
         {
             var formatter = new BinaryFormatter();
             using (var fileStream = new FileStream("users.dat", FileMode.Open))
             {
-                return formatter.Deserialize(fileStream) as User;
+                if(formatter.Deserialize(fileStream) is User user)
+                {
+                    User = user;
+                }
             }
         }
 
