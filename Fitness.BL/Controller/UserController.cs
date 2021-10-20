@@ -25,8 +25,19 @@ namespace Fitness.BL.Controller
         public UserController(string userName,string genderType, DateTime birthDate, double weight, double height)
         {
             var gender = new Gender(genderType);
-            var User = new User(userName, gender, birthDate, weight, height);
+            User = new User(userName, gender, birthDate, weight, height);
             //User = user ?? throw new ArgumentNullException(nameof(user), "User cannot be NULL.");
+        }
+        public UserController()
+        {
+            var formatter = new BinaryFormatter();
+            using (var fileStream = new FileStream("users.dat", FileMode.Open))
+            {
+                if(formatter.Deserialize(fileStream) is User user)
+                {
+                    User = user;
+                }
+            }
         }
         /// <summary>
         /// Save user data
@@ -37,21 +48,6 @@ namespace Fitness.BL.Controller
             using (var fileStream = new FileStream("users.dat", FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fileStream, User);
-            }
-        }
-        /// <summary>
-        /// Get user data
-        /// </summary>
-        /// <returns>Application user</returns>
-        public UserController()
-        {
-            var formatter = new BinaryFormatter();
-            using (var fileStream = new FileStream("users.dat", FileMode.Open))
-            {
-                if(formatter.Deserialize(fileStream) is User user)
-                {
-                    User = user;
-                }
             }
         }
 

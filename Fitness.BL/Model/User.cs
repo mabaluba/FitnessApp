@@ -44,7 +44,7 @@ namespace Fitness.BL.Model
                 throw new ArgumentNullException("Gender cannot be null.",nameof(gender));//другой вариант, сделать одинаковые у всех
             }
 
-            if (birthDate < DateTime.Parse("01.01.1900") || birthDate < DateTime.Now)
+            if (birthDate < DateTime.Parse("01.01.1900") || birthDate > DateTime.Now)
             {
                 throw new ArgumentException("Invalid birth date", nameof(birthDate));
             }
