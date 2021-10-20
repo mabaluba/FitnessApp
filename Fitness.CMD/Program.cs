@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fitness.BL.Model;
+using System;
 
 namespace Fitness.CMD
 {
@@ -8,6 +9,9 @@ namespace Fitness.CMD
         {
             Console.WriteLine("Welcome to Fitness App!");
             Console.WriteLine("Please, enter your Name");
+            var name = Console.ReadLine();
+
+            //var user = new User(name,);
         }
     }
 }

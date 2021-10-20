@@ -22,9 +22,11 @@ namespace Fitness.BL.Controller
         /// Create new Controller
         /// </summary>
         /// <param name="user"></param>
-        public UserController(User user)
+        public UserController(string userName,string genderType, DateTime birthDate, double weight, double height)
         {
-            User = user ?? throw new ArgumentNullException(nameof(user), "User cannot be NULL.");
+            var gender = new Gender(genderType);
+            var User = new User(userName, gender, birthDate, weight, height);
+            //User = user ?? throw new ArgumentNullException(nameof(user), "User cannot be NULL.");
         }
         /// <summary>
         /// Save user data
