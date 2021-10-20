@@ -12,7 +12,7 @@ namespace Fitness.BL.Model
     public class Gender
     {
         /// <summary>
-        /// Name
+        /// Type of gender
         /// </summary>
         public string GenderType { get; }
         /// <summary>
