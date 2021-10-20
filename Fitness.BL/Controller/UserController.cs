@@ -12,7 +12,7 @@ namespace Fitness.BL.Controller
 {
     public class UserController
     {
-        public User User { get;}
+        public User User { get; }
         public UserController(User user)
         {
             User = user ?? throw new ArgumentNullException(nameof(user), "User cannot be NULL.");
@@ -20,12 +20,23 @@ namespace Fitness.BL.Controller
         public async void Save()
         {
             //var formatter = new BinaryFormatter();
-            using (var fileStream = new FileStream("users.dat", FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream("users.json", FileMode.OpenOrCreate))
             {
                 //formatter.Serialize(fileStream, User);
                 await JsonSerializer.SerializeAsync(fileStream, User);
             }
-            
+        }
+        public async Task<User> Load()
+        {
+            using (var fileStream = new FileStream("users.json", FileMode.Open))
+            {
+                If( await JsonSerializer.DeserializeAsync<User>(fileStream) is User user)
+                { 
+                    return user;//проверка ???
+
+                }
+                    
+            }
         }
     }
 }
