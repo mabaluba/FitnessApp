@@ -1,7 +1,9 @@
 ﻿using Fitness.BL.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +16,14 @@ namespace Fitness.BL.Controller
         {
             User = user ?? throw new ArgumentNullException(nameof(user), "User cannot be NULL.");
         }
-        public bool Save()
+        public void Save()
         {
-            return true;
+            var formatter = new BinaryFormatter();
+            using (var fileStream = new FileStream("users.dat", FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fileStream, User);
+            }
+            
         }
     }
 }

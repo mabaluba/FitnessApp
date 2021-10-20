@@ -9,6 +9,7 @@ namespace Fitness.BL.Model
     /// <summary>
     /// Customer
     /// </summary>
+    [Serializable]
     public class User
     {
         #region Properties
