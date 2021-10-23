@@ -31,8 +31,14 @@ namespace Fitness.CMD
             {
                 Console.WriteLine("Please, enter your gender");
                 var gender = Console.ReadLine();
+                Console.WriteLine("Please, enter your Birdth date");
+                var birthDate = DateTime.Parse(Console.ReadLine());// TODO заменить на TryParse?
+                Console.WriteLine("Please, enter your weight");
+                var weight = double.Parse(Console.ReadLine());
+                Console.WriteLine("Please, enter your height");
+                var height = double.Parse(Console.ReadLine());
+                userController.SetNewUserData(gender, birthDate, weight, height);
 
-                userController.SetNewUserData();
             }
             Console.WriteLine(userController.CurrentUser);
 

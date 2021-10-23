@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using Fitness.BL.Serialization;
 
 namespace Fitness.BL.Controller
 {
@@ -35,7 +36,10 @@ namespace Fitness.BL.Controller
                 CurrentUser = new User(userName);
                 Users.Add(CurrentUser);
                 IsNewUser = true;
-                Save();
+                //Save();
+
+                SaveUsers();
+                
             }
 
             /*var gender = new Gender(genderType);
@@ -46,6 +50,25 @@ namespace Fitness.BL.Controller
         /// Get users collection
         /// </summary>
         /// <returns></returns>
+        public void SetNewUserData(string genderType, DateTime birthDate, double weight=1, double height=1)
+        {
+            CurrentUser.Gender = new Gender(genderType);
+            CurrentUser.BirthDate = birthDate;
+            CurrentUser.Weight = weight;
+            CurrentUser.Height = height;
+            SaveUsers();
+        }
+       /* public UserController()
+        {
+            var formatter = new BinaryFormatter();
+            using (var fileStream = new FileStream("users.dat", FileMode.Open))
+            {
+                if(formatter.Deserialize(fileStream) is User user)
+                {
+                    User = user;
+                }
+            }
+        }*/
         private List<User> GetUsers()
         {
             var formatter = new BinaryFormatter();
@@ -61,32 +84,10 @@ namespace Fitness.BL.Controller
                 }
             }
         } 
-        private void Save()
+        private void SaveUsers()
         {
-            var formatter = new BinaryFormatter();
-            using (var fileStream = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fileStream, Users);
-            }
+            ISerialization a = new JsonSerialization();
+            a.Save(Users);
         }
-        public void SetNewUserData(string genderType, DateTime birthDate, double weight=1, double height=1)
-        {
-            CurrentUser.Gender = new Gender(genderType);
-            CurrentUser.BirthDate = birthDate;
-            CurrentUser.Weight = weight;
-            CurrentUser.Height = height;
-            Save();
-        }
-       /* public UserController()
-        {
-            var formatter = new BinaryFormatter();
-            using (var fileStream = new FileStream("users.dat", FileMode.Open))
-            {
-                if(formatter.Deserialize(fileStream) is User user)
-                {
-                    User = user;
-                }
-            }
-        }*/
     }
 }
