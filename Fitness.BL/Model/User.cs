@@ -13,11 +13,15 @@ namespace Fitness.BL.Model
     public class User
     {
         #region Properties
-        public string Name { get; }//поробовать с init
-        public Gender Gender { get; }
-        public DateTime BirthDate { get; }
-        public double Weight { get; set; }
+        public string Name { get; set; }
+        public Gender Gender { get; set; }
+        public DateTime BirthDate { get; set; }
+        public double Weight { get; set; }//поробовать с init
         public double Height { get; set; }
+        public int Age 
+        { 
+            get { return (DateTime.Now.Year - BirthDate.Year); } 
+        }
         #endregion
         /// <summary>
         /// Create new Customer
@@ -66,9 +70,17 @@ namespace Fitness.BL.Model
             Weight = weight;
             Height = height;
         }
+        public User (string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("Name cannot be null or whitespace.", nameof(name));
+            }
+            Name = name;
+        }
         public override string ToString()
         {
-            return Name;//возможно стоит включить остальные свойства
+            return Name+" "+Age;//возможно стоит включить остальные свойства
         }
     }
 }
