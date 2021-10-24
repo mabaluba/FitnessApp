@@ -1,0 +1,15 @@
+﻿            in UserController
+            for Async Get method
+            
+            /*var a = new JsonSerializationAsync();
+            var res = a.GetDataAsync<User>();
+            try
+            {
+                var d = res.Result;//GetAwaiter().GetResult();
+                return d;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Исключение в Result", e);
+                return new List<User>();
+            }*/

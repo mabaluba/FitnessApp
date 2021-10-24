@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Serialization
 {
-    public class BFSerialization:ISerialization
+    public class BFSerialization//:ISerialization
     {
         public List<T> GetData<T>()
         {
@@ -25,8 +25,7 @@ namespace Fitness.BL.Serialization
                 }
             }
         }
-
-        public void Save<T>(List<T> users)
+        public void SaveData<T>(List<T> users)
         {
             var formatter = new BinaryFormatter();
             using (var fileStream = new FileStream("users.dat", FileMode.OpenOrCreate))

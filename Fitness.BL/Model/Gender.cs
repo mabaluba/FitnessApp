@@ -15,7 +15,7 @@ namespace Fitness.BL.Model
         /// <summary>
         /// Type of gender
         /// </summary>
-        public string GenderType { get; }
+        public string GenderType { get; set; }
         /// <summary>
         /// Create new gender.
         /// </summary>

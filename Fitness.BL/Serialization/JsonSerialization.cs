@@ -10,26 +10,21 @@ using System.IO;
 
 namespace Fitness.BL.Serialization
 {
-    public class JsonSerialization:ISerialization
+    /// <summary>
+    /// Provides methods with Serialization to and from json file format.
+    /// </summary>
+    public class JsonSerialization : ISerialization
     {
-        public async Task<List<T>> GetData<T>()
+        public void SaveData<T> (IEnumerable<T> users)
         {
-            /*var formatter = new BinaryFormatter();
-            using (var fileStream = new FileStream("users.dat", FileMode.Open))*/
-            using FileStream openStream = File.OpenRead("data.json");
-            return await JsonSerializer.DeserializeAsync<List<T>>(openStream);
-            
+            var usersJson = JsonSerializer.Serialize(users);
+            File.WriteAllText("data.json", usersJson);
         }
-
-        public async void Save<T>(List<T> users)
+        public List<T> GetData<T>()
         {
-            using FileStream createStream = File.OpenWrite("data.json");
-            await JsonSerializer.SerializeAsync(createStream, users);
+            var usersStringJson = File.ReadAllText("data.json");
+            var usersList = JsonSerializer.Deserialize<IEnumerable<T>>(usersStringJson);
+            return usersList.ToList();
         }
-
-        /*public void Save<T>(List<T> users)
-        {
-            throw new NotImplementedException();
-        }*/
     }
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Fitness.BL.Serialization;
+using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
@@ -29,17 +30,16 @@ namespace Fitness.BL.Controller
             {
                 throw new ArgumentNullException("User cannot be NULL.", nameof(userName));
             }
+
             Users = GetUsers();
             CurrentUser = Users.SingleOrDefault(u => u.Name==userName);
+
             if (CurrentUser == null)
             {
                 CurrentUser = new User(userName);
                 Users.Add(CurrentUser);
                 IsNewUser = true;
-                //Save();
-
                 SaveUsers();
-                
             }
 
             /*var gender = new Gender(genderType);
@@ -58,36 +58,15 @@ namespace Fitness.BL.Controller
             CurrentUser.Height = height;
             SaveUsers();
         }
-       /* public UserController()
-        {
-            var formatter = new BinaryFormatter();
-            using (var fileStream = new FileStream("users.dat", FileMode.Open))
-            {
-                if(formatter.Deserialize(fileStream) is User user)
-                {
-                    User = user;
-                }
-            }
-        }*/
         private List<User> GetUsers()
         {
-            var formatter = new BinaryFormatter();
-            using (var fileStream = new FileStream("users.dat", FileMode.Open))
-            {
-                if(formatter.Deserialize(fileStream) is List<User> users)
-                {
-                    return users;
-                }
-                else
-                {
-                    return new List<User>();
-                }
-            }
-        } 
+            ISerialization a = new JsonSerialization();
+            return a.GetData<User>();
+        }
         private void SaveUsers()
         {
             ISerialization a = new JsonSerialization();
-            a.Save(Users);
+            a.SaveData(Users);
         }
     }
 }
