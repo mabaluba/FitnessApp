@@ -12,10 +12,13 @@ namespace Fitness.BL.Model
     [Serializable]
     public class User
     {
-        public User()
-        {
-
-        }
+        /// <summary>
+        /// This empty constructor required in net5.0 for correct json serialization
+        /// </summary>
+        public User(){}
+        /// <summary>
+        /// Props of User object
+        /// </summary>
         #region Properties
         public string Name { get; set; }
         public Gender Gender { get; set; }
@@ -35,11 +38,7 @@ namespace Fitness.BL.Model
         /// <param name="birthDate"></param>
         /// <param name="weight"></param>
         /// <param name="height"></param>
-        public User(string name,
-                    Gender gender,
-                    DateTime birthDate,
-                    double weight,
-                    double height)
+        public User(string name, Gender gender, DateTime birthDate, double weight, double height)
         {
             #region Conditions check
             if (string.IsNullOrWhiteSpace(name))
