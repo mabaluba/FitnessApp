@@ -39,7 +39,7 @@ namespace Fitness.BL.Controller
                 CurrentUser = new User(userName);
                 Users.Add(CurrentUser);
                 IsNewUser = true;
-                SaveUsers();
+                SaveUsers();// не нужно
             }
 
             /*var gender = new Gender(genderType);
