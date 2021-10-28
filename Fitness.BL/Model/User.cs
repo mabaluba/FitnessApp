@@ -83,7 +83,7 @@ namespace Fitness.BL.Model
         }
         public override string ToString()
         {
-            return Name+" "+Age+" "+BirthDate;//возможно стоит включить остальные свойства
+            return Name+" "+Age+" "+BirthDate.ToShortDateString();//возможно стоит включить остальные свойства
         }
     }
 }
