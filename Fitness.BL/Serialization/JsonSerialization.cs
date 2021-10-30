@@ -22,9 +22,16 @@ namespace Fitness.BL.Serialization
         }
         public List<T> GetData<T>()
         {
-            var usersStringJson = File.ReadAllText("data.json");
-            var usersList = JsonSerializer.Deserialize<IEnumerable<T>>(usersStringJson);
-            return usersList.ToList();
+            try
+            {
+                var usersStringJson = File.ReadAllText("data.json");
+                var usersList = JsonSerializer.Deserialize<IEnumerable<T>>(usersStringJson);
+                return usersList.ToList();
+            }
+            catch
+            {
+                return new List<T>();
+            }
         }
     }
 }
