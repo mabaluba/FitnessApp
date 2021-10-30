@@ -18,22 +18,25 @@ namespace Fitness.CMD
                 Console.WriteLine("Please, enter your gender");
                 var gender = Console.ReadLine();
                 Console.WriteLine("Please, enter your birdth date (dd.mm.yyyy)");
-                DateTime birthDate;
-                while (!DateTime.TryParse(Console.ReadLine(), out birthDate))
-                {
-                    Console.WriteLine("Enter your birdthday correct format as follow (dd.mm.yyyy)");
-                }
-                //var birthDate = DateTime.Parse(Console.ReadLine());// TODO заменить на TryParse?
+                var birthDate = ParseToDate();
                 Console.WriteLine("Please, enter your weight");
                 var weight = ParseToDouble();
-                //var weight = double.Parse(Console.ReadLine());
                 Console.WriteLine("Please, enter your height");
                 var height = ParseToDouble();
-                //var height = double.Parse(Console.ReadLine());
                 userController.SetNewUserData(gender, birthDate, weight, height);
             }
             Console.WriteLine(userController.CurrentUser);
         }
+        private static DateTime ParseToDate()
+        {
+            DateTime birthDate;
+            while (!DateTime.TryParse(Console.ReadLine(), out birthDate))
+            {
+                Console.WriteLine("Enter your birdthday correct format as follow (dd.mm.yyyy)");
+            }
+            return birthDate;
+        }
+
         private static double ParseToDouble()
         {
             double doubleNumber;
