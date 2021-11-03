@@ -32,10 +32,6 @@ namespace Fitness.BL.Serialization
             {
                 return new List<T>();
             }
-            catch(Exception)
-            {
-                throw;
-            }
         }
     }
 }
