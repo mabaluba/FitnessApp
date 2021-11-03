@@ -28,9 +28,13 @@ namespace Fitness.BL.Serialization
                 var usersList = JsonSerializer.Deserialize<IEnumerable<T>>(usersStringJson);
                 return usersList.ToList();
             }
-            catch
+            catch(FileNotFoundException)
             {
                 return new List<T>();
+            }
+            catch(Exception)
+            {
+                throw;
             }
         }
     }
