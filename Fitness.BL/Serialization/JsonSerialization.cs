@@ -15,18 +15,19 @@ namespace Fitness.BL.Serialization
     /// </summary>
     public class JsonSerialization : ISerialization
     {
-        public void SaveData<T> (IEnumerable<T> users)
+        public void SaveData<T> (IEnumerable<T> items,string fileName)
         {
-            var usersJson = JsonSerializer.Serialize(users);
-            File.WriteAllText("data.json", usersJson);
+            var itemJson = JsonSerializer.Serialize(items);
+            File.WriteAllText(fileName, itemJson);
         }
-        public List<T> GetData<T>()
+
+        public List<T> GetData<T>(string fileName)
         {
             try
             {
-                var usersStringJson = File.ReadAllText("data.json");
-                var usersList = JsonSerializer.Deserialize<IEnumerable<T>>(usersStringJson);
-                return usersList.ToList();
+                var itemsStringJson = File.ReadAllText(fileName);
+                var itemsList = JsonSerializer.Deserialize<IEnumerable<T>>(itemsStringJson);
+                return itemsList.ToList();
             }
             catch(FileNotFoundException)
             {

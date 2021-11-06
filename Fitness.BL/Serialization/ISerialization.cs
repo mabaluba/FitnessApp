@@ -8,7 +8,7 @@ namespace Fitness.BL.Serialization
 {
     interface ISerialization
     {
-        public void SaveData<T>(IEnumerable<T> users);
-        public List<T> GetData<T>();
+        public void SaveData<T>(IEnumerable<T> items, string fileName);
+        public List<T> GetData<T>(string fileName);
     }
 }

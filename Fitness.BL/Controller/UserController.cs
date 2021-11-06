@@ -12,6 +12,7 @@ namespace Fitness.BL.Controller
     /// </summary>
     public class UserController
     {
+        private const string UsersFileName = "users.json";
         /// <summary>
         /// Collection of users
         /// </summary>
@@ -62,6 +63,7 @@ namespace Fitness.BL.Controller
             CurrentUser.Height = height;
             Users.Add(CurrentUser);
             SaveUsers();
+            //JsonSerialization.SaveData(Users, UsersFileName);
         }
         /// <summary>
         /// Get users collection
@@ -70,7 +72,7 @@ namespace Fitness.BL.Controller
         private List<User> GetUsers()
         {
             ISerialization a = new JsonSerialization();
-            return a.GetData<User>();
+            return a.GetData<User>(UsersFileName);
         }
         /// <summary>
         /// Save users collection
@@ -78,7 +80,7 @@ namespace Fitness.BL.Controller
         private void SaveUsers()
         {
             ISerialization a = new JsonSerialization();
-            a.SaveData(Users);
+            a.SaveData(Users, UsersFileName);
         }
     }
 }
