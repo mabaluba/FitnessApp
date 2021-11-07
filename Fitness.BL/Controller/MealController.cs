@@ -3,33 +3,44 @@ using Fitness.BL.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
     public class MealController
     {
         private const string FoodsFileName = "foods.json";
-        private readonly User _user;
-        public List<Food> Foods { get; }
-        public List<Meal> Meals { get; }//TODO finish getting Meals
 
-        public MealController(User user)
-        {
-            _user = user ?? throw new ArgumentNullException(nameof(user),"User cannot be null.");
+        public List<Food> Foods { get; }
+        public Meal Meal { get; }
+
+        public MealController()
+        { 
             Foods = GetAllFoods();
+            Meal = new();
+        }
+
+        public void Add(Food food, double weight)
+        {
+            var product = Foods.SingleOrDefault(f => f.FoodName == food.FoodName);
+            if (product == null)
+            {
+                Foods.Add(food);
+                Meal.Add(food, weight);
+                SaveAllFoods();
+            }
+            else
+            {
+                Meal.Add(product, weight);
+            }
         }
 
         private List<Food> GetAllFoods()
         {
-            ISerialization serialization = new JsonSerialization();
-            return serialization.GetData<Food>(FoodsFileName);
+            return JsonSerialization.GetData<Food>(FoodsFileName);
         }
-        private void SaveFoods()
+        private void SaveAllFoods()
         {
-            ISerialization a = new JsonSerialization();
-            a.SaveData(Foods, FoodsFileName);
+            JsonSerialization.SaveData(Foods, FoodsFileName);
         }
     }
 }

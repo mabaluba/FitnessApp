@@ -71,16 +71,14 @@ namespace Fitness.BL.Controller
         /// <returns></returns>
         private List<User> GetUsers()
         {
-            ISerialization a = new JsonSerialization();
-            return a.GetData<User>(UsersFileName);
+            return JsonSerialization.GetData<User>(UsersFileName);
         }
         /// <summary>
         /// Save users collection
         /// </summary>
         private void SaveUsers()
         {
-            ISerialization a = new JsonSerialization();
-            a.SaveData(Users, UsersFileName);
+            JsonSerialization.SaveData(Users, UsersFileName);
         }
     }
 }

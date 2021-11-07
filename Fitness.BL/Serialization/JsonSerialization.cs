@@ -13,15 +13,15 @@ namespace Fitness.BL.Serialization
     /// <summary>
     /// Provides methods with Serialization to and from json file format.
     /// </summary>
-    public class JsonSerialization : ISerialization
+    public class JsonSerialization// : ISerialization
     {
-        public void SaveData<T> (IEnumerable<T> items,string fileName)
+        public static void SaveData<T> (IEnumerable<T> items,string fileName)
         {
             var itemJson = JsonSerializer.Serialize(items);
             File.WriteAllText(fileName, itemJson);
         }
 
-        public List<T> GetData<T>(string fileName)
+        public static List<T> GetData<T>(string fileName)
         {
             try
             {

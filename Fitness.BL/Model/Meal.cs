@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 namespace Fitness.BL.Model
 {
     /// <summary>
-    /// Each meal
+    /// Current meal keeper. Not save all meals info for each user, but only for showing current meal of current user.
+    /// TODO Save meals info for each user
     /// </summary>
     public class Meal
     {
         public DateTime MealTime { get;}
         public Dictionary<Food,double> Foods{ get;}
-        public User User { get;}
-        public Meal(User user)
+        public Meal()
         {
-            User = user?? throw new ArgumentNullException(nameof(user),"User cannot be null.");
             MealTime = DateTime.UtcNow;
             Foods = new();
         }
