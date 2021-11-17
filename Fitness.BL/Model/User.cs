@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace Fitness.BL.Model
 {
@@ -8,7 +7,7 @@ namespace Fitness.BL.Model
     /// Customer
     /// </summary>
     [Serializable]
-    public class User
+    public sealed class User
     {
         /// <summary>
         /// This empty constructor required in net5.0 for correct json serialization
@@ -21,7 +20,7 @@ namespace Fitness.BL.Model
         public string Name { get; set; }
         public Gender Gender { get; set; }
         public DateTime BirthDate { get; set; }
-        public double Weight { get; set; }//поробовать с init
+        public double Weight { get; set; }
         public double Height { get; set; }
         public int Age 
         { 
@@ -81,7 +80,7 @@ namespace Fitness.BL.Model
         }
         public override string ToString()
         {
-            return Name+", "+Age+" years old, "+BirthDate.ToShortDateString();//возможно стоит включить остальные свойства
+            return Name + ", " + Age + " years old";//+BirthDate.ToShortDateString();//возможно стоит включить остальные свойства
         }
     }
 }

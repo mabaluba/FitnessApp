@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 
 namespace Fitness.BL.Serialization
 {
-    interface ISerialization
+    public interface ISerialization
     {
-        public void SaveData<T>(IEnumerable<T> items, string fileName);
-        public List<T> GetData<T>(string fileName);
+        public void SaveData<T>(T items, string fileName);
+        public IEnumerable<T> GetData<T>(string fileName);
     }
 }

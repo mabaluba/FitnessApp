@@ -1,32 +1,29 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Fitness.BL.Serialization;
-using System;
 using System.Collections.Generic;
+using Fitness.BL.Model;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fitness.BL.Controller;
 
 namespace Fitness.BL.Serialization.Tests
 {
     [TestClass()]
-    public class JsonSerializationTests
+    public class JsonSerializationTests : JsonSerialization
     {
         [TestMethod()]
-        public void SaveDataTest()
+        public void Save_Get_DataTest()
         {
             //Arrange
             var userName = Guid.NewGuid().ToString();
+            IEnumerable<User> itemsCollection = new List<User>
+            {
+                new User { Name = userName }
+            };
+            var fileName = "test.json";
             //Act
-            var controller = new UserController(userName);
+            SaveData(itemsCollection, fileName);
+            var resultUserName = GetData<User>(fileName).ToList().First().Name;
             //Assert
-            Assert.AreEqual(userName, controller.CurrentUser.Name);
+            Assert.AreEqual(userName, resultUserName);
         }
-
-       /* [TestMethod()]
-        public void GetDataTest()
-        {
-            Assert.Fail();
-        }*/
     }
 }

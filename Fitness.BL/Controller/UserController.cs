@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using Fitness.BL.Serialization;
 
 namespace Fitness.BL.Controller
@@ -10,21 +9,25 @@ namespace Fitness.BL.Controller
     /// <summary>
     /// User Controller
     /// </summary>
-    public class UserController
+    public class UserController: Repository
     {
         private const string UsersFileName = "users.json";
+
         /// <summary>
         /// Collection of users
         /// </summary>
         public List<User> Users { get; }
+
         /// <summary>
         /// Type User for checking and saving new user
         /// </summary>
         public User CurrentUser { get; }
+
         /// <summary>
         /// Prop for checking if user is new
         /// </summary>
         public bool IsNewUser { get; } = false;
+
         /// <summary>
         /// Create new Controller for:
         /// - getting user name
@@ -36,10 +39,10 @@ namespace Fitness.BL.Controller
         {
             if (string.IsNullOrWhiteSpace(userName))
             {
-                throw new ArgumentNullException("User cannot be NULL.", nameof(userName));
+                throw new ArgumentNullException(nameof(userName), "User cannot be NULL.");
             }
-
-            Users = GetUsers();
+            
+            Users = GetData<User>(UsersFileName).ToList();
             CurrentUser = Users.SingleOrDefault(u => u.Name==userName);
 
             if (CurrentUser == null)
@@ -62,23 +65,7 @@ namespace Fitness.BL.Controller
             CurrentUser.Weight = weight;
             CurrentUser.Height = height;
             Users.Add(CurrentUser);
-            SaveUsers();
-            //JsonSerialization.SaveData(Users, UsersFileName);
-        }
-        /// <summary>
-        /// Get users collection
-        /// </summary>
-        /// <returns></returns>
-        private List<User> GetUsers()
-        {
-            return JsonSerialization.GetData<User>(UsersFileName);
-        }
-        /// <summary>
-        /// Save users collection
-        /// </summary>
-        private void SaveUsers()
-        {
-            JsonSerialization.SaveData(Users, UsersFileName);
+            SaveData(Users,UsersFileName);
         }
     }
 }

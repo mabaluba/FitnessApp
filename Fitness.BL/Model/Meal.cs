@@ -6,30 +6,41 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Model
 {
-    /// <summary>
-    /// Current meal keeper. Not save all meals info for each user, but only for showing current meal of current user.
     /// TODO Save meals info for each user
+    
+    /// <summary>
+    /// Current meal keeper. Shows current meal of current user. Not keeps every meal.
     /// </summary>
     public class Meal
     {
-        public DateTime MealTime { get;}
-        public Dictionary<Food,double> Foods{ get;}
-        public Meal()
+        public User CurrentUser { get; }
+        /// <summary>
+        /// Time of meal taking
+        /// </summary>
+        public DateTime MealTime { get; private set; }
+        /// <summary>
+        /// Keeps products and its weight from current meal
+        /// </summary>
+        public Dictionary<string ,double> Foods{ get; set; }
+        /// <summary>
+        /// Set Date and Time of the meal
+        /// </summary>
+        public Meal(){}
+        public Meal(User user)
         {
-            MealTime = DateTime.UtcNow;
-            Foods = new();
+            CurrentUser = user ?? throw new ArgumentNullException(nameof(user), $"'{nameof(user)}' cannot be null"); ;
+            MealTime = DateTime.Now;
+            Foods = new ();
         }
-        public void Add(Food food, double weight)
+        
+        public override string ToString()
         {
-            var product = Foods.Keys.FirstOrDefault(f => f.FoodName.Equals(food.FoodName));
-            if (product == null)
+            string result=string.Empty;
+            foreach (var item in Foods)
             {
-                Foods.Add(food, weight);
+                result+= $"\n{item.Key} - {item.Value}g.\n";
             }
-            else
-            {
-                Foods[product] += weight;
-            }
+            return result;
         }
     }
 }

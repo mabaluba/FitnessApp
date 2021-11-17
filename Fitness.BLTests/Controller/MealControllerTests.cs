@@ -14,20 +14,38 @@ namespace Fitness.BL.Controller.Tests
     {
 
         [TestMethod()]
-        public void AddTest()
+        public void AddProductToMealAndToProductsTest()
         {
             //Arrange
             var userName = Guid.NewGuid().ToString();
-            var foodName = Guid.NewGuid().ToString();
-            var rnd = new Random();
-            //var userController = new UserController(userName);
-            //var mealController = new MealController(userController.CurrentUser);
-            var mealController = new MealController();
-            var food = new Food(foodName, rnd.Next(50, 500), rnd.Next(50, 500), rnd.Next(50, 500), rnd.Next(50, 500));
+            var productName = Guid.NewGuid().ToString();
+            var userController = new UserController(userName);
+            var mealController = new MealController(userController.CurrentUser);
             //Act
-            mealController.Add(food, 100);
+            mealController.AddProductToMeal(productName, 100);
+            mealController.AddProductToFoods(200, 300, 400, 500);
             //Assert
-            Assert.AreEqual(food.FoodName, mealController.Meal.Foods.First().Key.FoodName);
+            Assert.AreEqual(productName, mealController.CurrentMeal.Foods.First().Key);
+            Assert.AreEqual(productName, mealController.Products.First().FoodName);
         }
+
+        //[TestMethod()]
+        //public void AddProductToFoodsTest()
+        //{
+        //    //Arrange
+        //    var userName = Guid.NewGuid().ToString();
+        //    var productName = Guid.NewGuid().ToString();
+        //    var userController = new UserController(userName);
+        //    var mealController = new MealController(userController.CurrentUser);
+        //    var rnd = new Random();
+        //    var product = new Food(productName, rnd.Next(50, 500), rnd.Next(50, 500), rnd.Next(50, 500), rnd.Next(50, 500));
+
+        //    mealController.CurrentProduct.FoodName = productName;
+            
+        //    //Act
+        //    mealController.AddProductToFoods(rnd.Next(50, 500), rnd.Next(50, 500), rnd.Next(50, 500), rnd.Next(50, 500));
+        //    //Assert
+        //    Assert.AreEqual(product.FoodName, )
+        //}
     }
 }
