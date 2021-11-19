@@ -19,7 +19,7 @@ namespace Fitness.CMD
             var currentUser = userController.CurrentUser;
             Console.WriteLine(currentUser);
             Console.WriteLine();
-            var mealController = new MealController(currentUser);
+            var mealController = new MealController(currentUser.Name);
 
             while (true)
             {

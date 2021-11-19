@@ -25,12 +25,12 @@ namespace Fitness.BL.Controller
         /// </summary>
         public List<Meal> Meals { get; }
         public Meal CurrentMeal { get; }
-        public MealController(User user)
+        public MealController(string userName)
         {
             //user = user ?? throw new ArgumentNullException(nameof(user), $"'{nameof(user)}' cannot be null");
             Products = GetData<Food>(FoodsFileName).ToList();
             Meals = GetData<Meal>(MealsFileName).ToList();
-            CurrentMeal = new Meal(user);
+            CurrentMeal = new Meal(userName);
         }
 
         /// <summary>

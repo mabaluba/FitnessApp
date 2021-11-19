@@ -13,7 +13,7 @@ namespace Fitness.BL.Model
     /// </summary>
     public class Meal
     {
-        public User CurrentUser { get; }
+        public string UserName { get; }
         /// <summary>
         /// Time of meal taking
         /// </summary>
@@ -26,9 +26,9 @@ namespace Fitness.BL.Model
         /// Set Date and Time of the meal
         /// </summary>
         public Meal(){}
-        public Meal(User user)
+        public Meal(string userName)
         {
-            CurrentUser = user ?? throw new ArgumentNullException(nameof(user), $"'{nameof(user)}' cannot be null"); ;
+            UserName = userName ?? throw new ArgumentNullException(nameof(userName), $"'{nameof(userName)}' cannot be null"); ;
             MealTime = DateTime.Now;
             Foods = new ();
         }

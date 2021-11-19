@@ -20,7 +20,7 @@ namespace Fitness.BL.Controller.Tests
             var userName = Guid.NewGuid().ToString();
             var productName = Guid.NewGuid().ToString();
             var userController = new UserController(userName);
-            var mealController = new MealController(userController.CurrentUser);
+            var mealController = new MealController(userController.CurrentUser.Name);
             //Act
             mealController.AddProductToMeal(productName, 100);
             mealController.AddProductToFoods(200, 300, 400, 500);
