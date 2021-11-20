@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Fitness.BL.Model
 {
     /// <summary>

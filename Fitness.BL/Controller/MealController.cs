@@ -11,6 +11,9 @@ namespace Fitness.BL.Controller
         /// Filename for storing all products
         /// </summary>
         private const string FoodsFileName = "foods.json";
+        /// <summary>
+        /// Filename for storing all meals
+        /// </summary>
         private const string MealsFileName = "meals.json";
         private string ProductName { get; set; }
         /// <summary>

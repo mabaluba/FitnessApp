@@ -1,8 +1,7 @@
 ﻿using Fitness.BL.Controller;
-using Fitness.BL.Model;
 using System;
 using System.Globalization;
-using System.Linq;
+using System.Resources;
 
 namespace Fitness.CMD
 {
@@ -10,8 +9,11 @@ namespace Fitness.CMD
     { 
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Fitness App!");
-            Console.WriteLine("Please, enter your Name");
+            var culture = CultureInfo.CreateSpecificCulture("en-US");
+            var resourceManager = new ResourceManager("Fitness.CMD.Localizations.Messages", typeof(Program).Assembly);
+
+            Console.WriteLine(resourceManager.GetString("Welcome",culture));
+            Console.WriteLine(resourceManager.GetString("EnterName", culture));
             var nameRaw = Console.ReadLine();
             var name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nameRaw);
             var userController = new UserController(name);
@@ -23,7 +25,7 @@ namespace Fitness.CMD
 
             while (true)
             {
-                Console.WriteLine("What would you like to do next:");
+                Console.WriteLine(resourceManager.GetString("WhatToDo", culture));
                 Console.WriteLine("\tM - enter meal products\n");
                 Console.WriteLine("\tP - show your meal products\n");
                 //Console.WriteLine("\tE - enter exercise\n");//пока нет
@@ -88,7 +90,7 @@ namespace Fitness.CMD
             #region Adds new product and its nutrition information to the products information storage
             {
                 Console.WriteLine("There is no nutrition information of this product, please, enter some:");
-                Console.WriteLine("Calories:");
+                Console.WriteLine("Calories(Kcal.):");
                 var calories = ParseToDouble();
                 Console.WriteLine("Proteins:");
                 var proteins = ParseToDouble();
