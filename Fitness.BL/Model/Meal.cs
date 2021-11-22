@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.BL.Model
-{
-    /// TODO Save meals info for each user
-    
+{   
     /// <summary>
     /// Current meal keeper. Shows current meal of current user. Not keeps every meal.
     /// </summary>
-    public class Meal
+    public sealed class Meal
     {
         public string UserName { get; }
         /// <summary>
@@ -28,7 +23,7 @@ namespace Fitness.BL.Model
         public Meal(){}
         public Meal(string userName)
         {
-            UserName = userName ?? throw new ArgumentNullException(nameof(userName), $"'{nameof(userName)}' cannot be null"); ;
+            UserName = ExceptionHelper.NullOrWhiteSpaceCheck(userName);
             MealTime = DateTime.Now;
             Foods = new ();
         }

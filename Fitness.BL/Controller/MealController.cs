@@ -19,15 +19,15 @@ namespace Fitness.BL.Controller
         public List<Food> Products { get; }
         public bool HasNewProduct { get; private set; } = false;
         public Food CurrentProduct { get; private set;}
-        
         /// <summary>
         /// Keeps all meals collection
         /// </summary>
         public List<Meal> Meals { get; }
         public Meal CurrentMeal { get; }
+
         public MealController(string userName)
         {
-            //user = user ?? throw new ArgumentNullException(nameof(user), $"'{nameof(user)}' cannot be null");
+            userName = ExceptionHelper.NullOrWhiteSpaceCheck(userName);
             Products = GetData<Food>(FoodsFileName).ToList();
             Meals = GetData<Meal>(MealsFileName).ToList();
             CurrentMeal = new Meal(userName);
@@ -49,7 +49,7 @@ namespace Fitness.BL.Controller
             {
                 CurrentMeal.Foods.Add(productName, weight);
             }
-            HasNewProduct = Products.FirstOrDefault(p => p.FoodName == productName)==null;
+            HasNewProduct = !Products.Any(p => p.FoodName == productName);
         }
 
         /// <summary>

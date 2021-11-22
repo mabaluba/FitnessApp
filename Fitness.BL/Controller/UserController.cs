@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fitness.BL.Serialization;
 
 namespace Fitness.BL.Controller
 {
@@ -37,11 +36,7 @@ namespace Fitness.BL.Controller
         /// <param name="userName"></param>
         public UserController(string userName)
         {
-            if (string.IsNullOrWhiteSpace(userName))
-            {
-                throw new ArgumentNullException(nameof(userName), "User cannot be NULL.");
-            }
-            
+            userName = ExceptionHelper.NullOrWhiteSpaceCheck(userName);
             Users = GetData<User>(UsersFileName).ToList();
             CurrentUser = Users.SingleOrDefault(u => u.Name==userName);
 
@@ -58,12 +53,12 @@ namespace Fitness.BL.Controller
         /// <param name="birthDate"></param>
         /// <param name="weight"></param>
         /// <param name="height"></param>
-        public void SetNewUserData(string genderType, DateTime birthDate, double weight=1, double height=1)
+        public void SetNewUserData(string genderType, DateTime birthDate, double weight, double height)
         {
             CurrentUser.Gender = new Gender(genderType);
-            CurrentUser.BirthDate = birthDate;
-            CurrentUser.Weight = weight;
-            CurrentUser.Height = height;
+            CurrentUser.BirthDate = (birthDate < DateTime.Parse("01.01.1900") || birthDate > DateTime.Now) ? throw new ArgumentException("Invalid birth date", nameof(birthDate)) : birthDate;
+            CurrentUser.Weight = weight <= 0 ? throw new ArgumentException("Weight cannot be zero or less.", nameof(weight)) : weight;
+            CurrentUser.Height = height <= 0 ? throw new ArgumentException("Height cannot be zero or less.", nameof(height)) : height;
             Users.Add(CurrentUser);
             SaveData(Users,UsersFileName);
         }

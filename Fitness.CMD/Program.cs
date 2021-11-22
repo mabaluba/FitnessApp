@@ -1,8 +1,6 @@
 ﻿using Fitness.BL.Controller;
-using Fitness.BL.Model;
 using System;
 using System.Globalization;
-using System.Linq;
 
 namespace Fitness.CMD
 {
@@ -10,24 +8,21 @@ namespace Fitness.CMD
     { 
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Fitness App!");
-            Console.WriteLine("Please, enter your Name");
-            var nameRaw = Console.ReadLine();
-            var name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nameRaw);
+            Console.WriteLine("Welcome to Fitness App!\nPlease, enter your Name");
+            var name = IsNullOrWhitespaceCheck(Console.ReadLine());
             var userController = new UserController(name);
             AddNewUser(userController);
-            var currentUser = userController.CurrentUser;
-            Console.WriteLine(currentUser);
+            Console.WriteLine(userController.CurrentUser);
             Console.WriteLine();
-            var mealController = new MealController(currentUser.Name);
 
+            var mealController = new MealController(userController.CurrentUser.Name);
             while (true)
             {
                 Console.WriteLine("What would you like to do next:");
-                Console.WriteLine("\tM - enter meal products\n");
-                Console.WriteLine("\tP - show your meal products\n");
-                //Console.WriteLine("\tE - enter exercise\n");//пока нет
-                Console.WriteLine("\tQ - quit\n");
+                Console.WriteLine("  M - enter meal products\n");
+                Console.WriteLine("  P - show your meal products\n");
+                //Console.WriteLine("  E - enter exercise\n");//пока нет
+                Console.WriteLine("  Q - quit\n");
 
                 switch (Console.ReadKey().Key)
                 {
@@ -45,6 +40,15 @@ namespace Fitness.CMD
                         break;
                 }
             }
+        }
+        private static string IsNullOrWhitespaceCheck(string userInput)
+        {
+            while (string.IsNullOrWhiteSpace(userInput))
+            {
+                Console.WriteLine("This value cannot be null or whitespace, please try again.");
+                userInput = Console.ReadLine();
+            }
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userInput);
         }
 
         private static void ShowMealProducts(MealController mealController)
@@ -80,7 +84,7 @@ namespace Fitness.CMD
         private static void EnterNewMeal(MealController mealController)
         {
             Console.WriteLine("\nEnter product name:");
-            string productName = Console.ReadLine().ToLower();
+            string productName = IsNullOrWhitespaceCheck(Console.ReadLine().ToLower());
             Console.WriteLine("Enter product weight:");
             double productWeight = ParseToDouble();
             mealController.AddProductToMeal(productName, productWeight);
@@ -115,9 +119,9 @@ namespace Fitness.CMD
         private static double ParseToDouble()
         {
             double doubleNumber;
-            while (!double.TryParse(Console.ReadLine(), out doubleNumber))
+            while (!double.TryParse(Console.ReadLine(), out doubleNumber) || doubleNumber < 0)
             {
-                Console.WriteLine("Wrong format, enter again");
+                Console.WriteLine("This value should be a number and cannot be less than 0, please enter again.");
             }
             return doubleNumber;
         }
