@@ -22,23 +22,27 @@ namespace Fitness.CMD
                 Console.WriteLine("What would you like to do next:");
                 Console.WriteLine("  M - enter meal products\n");
                 Console.WriteLine("  P - show your meal products\n");
-                Console.WriteLine("  W - enter workout exercise\n");
+                Console.WriteLine("  E - enter workout exercise\n");
+                Console.WriteLine("  W - show your workout\n");
                 Console.WriteLine("  Q - quit\n");
 
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.M:
                         EnterNewMeal(mealController);
-                        
                         break;
                     case ConsoleKey.P:
                         ShowMealProducts(mealController);
                         break;
-                    case ConsoleKey.W:
+                    case ConsoleKey.E:
                         EnterNewWorkout(workoutController);
                         break;
+                    case ConsoleKey.W:
+                        Console.WriteLine(workoutController.CurrentWorkout);
+                        break;
                     case ConsoleKey.Q:
-                        mealController.SaveProductsMeals();//проверить как сохраняются продукты и приемы пищи
+                        mealController.SaveProductsMeals();
+                        workoutController.SaveWorkout();
                         Environment.Exit(0);
                         break;
                     default:
@@ -58,7 +62,6 @@ namespace Fitness.CMD
             Console.WriteLine("\nEnter calories burned per minute:");
             var caloriesBurnedPerMinute = ParseToDouble();
             workoutController.AddExercise(exerciseName, exerciseTime, caloriesBurnedPerMinute);
-
         }
 
         private static string IsNullOrWhitespaceCheck(string userInput)
@@ -69,7 +72,6 @@ namespace Fitness.CMD
                 userInput = Console.ReadLine();
             }
             return userInput;
-            //return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userInput);
         }
 
         private static void ShowMealProducts(MealController mealController)
@@ -111,7 +113,7 @@ namespace Fitness.CMD
             #region Adds new product and its nutrition information to the products information storage
             {
                 Console.WriteLine("There is no nutrition information of this product, please, enter some:");
-                Console.WriteLine("Calories:");
+                Console.WriteLine("Calories(Kcal):");
                 var calories = ParseToDouble();
                 Console.WriteLine("Proteins:");
                 var proteins = ParseToDouble();
@@ -122,7 +124,6 @@ namespace Fitness.CMD
                 mealController.AddProductToFoods(calories, proteins, fats, carbohydrates);
             }
             #endregion
-            //mealController.SaveProductsMeals();
         }
 
         private static DateTime ParseToDate()

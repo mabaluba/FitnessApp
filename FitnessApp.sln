@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fitness.BL", "Fitness.BL\Fi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fitness.CMD", "Fitness.CMD\Fitness.CMD.csproj", "{786954D9-9FC5-46B5-8BCC-3384F25ABAF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitness.BLTests", "Fitness.BLTests\Fitness.BLTests.csproj", "{189FCEBB-870B-44D9-83E5-9F54A9DCE098}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fitness.BLTests", "Fitness.BLTests\Fitness.BLTests.csproj", "{189FCEBB-870B-44D9-83E5-9F54A9DCE098}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

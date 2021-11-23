@@ -33,7 +33,7 @@ namespace Fitness.BL.Model
             string result=string.Empty;
             foreach (var item in Foods)
             {
-                result+= $"\n{item.Key} - {item.Value}g.\n";
+                result+= $"\n\t{item.Key} - {item.Value}g.";
             }
             return result;
         }
