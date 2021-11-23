@@ -9,30 +9,36 @@ namespace Fitness.CMD
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Fitness App!\nPlease, enter your Name");
-            var name = IsNullOrWhitespaceCheck(Console.ReadLine());
-            var userController = new UserController(name);
+            var name = IsNullOrWhitespaceCheck(Console.ReadLine().ToLower());
+            var userController = new UserController(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name));
             AddNewUser(userController);
             Console.WriteLine(userController.CurrentUser);
             Console.WriteLine();
 
             var mealController = new MealController(userController.CurrentUser.Name);
+            var workoutController = new WorkoutController(userController.CurrentUser.Name);
             while (true)
             {
                 Console.WriteLine("What would you like to do next:");
                 Console.WriteLine("  M - enter meal products\n");
                 Console.WriteLine("  P - show your meal products\n");
-                //Console.WriteLine("  E - enter exercise\n");//пока нет
+                Console.WriteLine("  W - enter workout exercise\n");
                 Console.WriteLine("  Q - quit\n");
 
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.M:
                         EnterNewMeal(mealController);
+                        
                         break;
                     case ConsoleKey.P:
                         ShowMealProducts(mealController);
                         break;
+                    case ConsoleKey.W:
+                        EnterNewWorkout(workoutController);
+                        break;
                     case ConsoleKey.Q:
+                        mealController.SaveProductsMeals();//проверить как сохраняются продукты и приемы пищи
                         Environment.Exit(0);
                         break;
                     default:
@@ -41,6 +47,20 @@ namespace Fitness.CMD
                 }
             }
         }
+
+        private static void EnterNewWorkout(WorkoutController workoutController)
+        {
+
+            Console.WriteLine("\nEnter exercise name:");
+            var exerciseName = IsNullOrWhitespaceCheck(Console.ReadLine().ToLower());
+            Console.WriteLine("\nEnter exercise time in minutes:");
+            var exerciseTime = ParseToDouble();
+            Console.WriteLine("\nEnter calories burned per minute:");
+            var caloriesBurnedPerMinute = ParseToDouble();
+            workoutController.AddExercise(exerciseName, exerciseTime, caloriesBurnedPerMinute);
+
+        }
+
         private static string IsNullOrWhitespaceCheck(string userInput)
         {
             while (string.IsNullOrWhiteSpace(userInput))
@@ -48,7 +68,8 @@ namespace Fitness.CMD
                 Console.WriteLine("This value cannot be null or whitespace, please try again.");
                 userInput = Console.ReadLine();
             }
-            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userInput);
+            return userInput;
+            //return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userInput);
         }
 
         private static void ShowMealProducts(MealController mealController)
@@ -66,7 +87,6 @@ namespace Fitness.CMD
         private static void AddNewUser(UserController userController)
         {
             if (userController.IsNewUser)
-            #region Adds new user
             {
                 Console.WriteLine("Please, enter your gender");
                 var gender = Console.ReadLine();
@@ -78,7 +98,6 @@ namespace Fitness.CMD
                 var height = ParseToDouble();
                 userController.SetNewUserData(gender, birthDate, weight, height);
             }
-            #endregion
         }
 
         private static void EnterNewMeal(MealController mealController)
@@ -103,7 +122,7 @@ namespace Fitness.CMD
                 mealController.AddProductToFoods(calories, proteins, fats, carbohydrates);
             }
             #endregion
-            mealController.SaveProductsMeals();
+            //mealController.SaveProductsMeals();
         }
 
         private static DateTime ParseToDate()

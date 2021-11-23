@@ -34,7 +34,7 @@ namespace Fitness.BL.Controller
         }
 
         /// <summary>
-        /// Adds product to the current meal and new product to products 
+        /// Adds product to the current meal 
         /// </summary>
         /// <param name="food"></param>
         /// <param name="weight"></param>

@@ -2,7 +2,7 @@
 
 namespace Fitness.BL.Model
 {
-    internal sealed class Exercise
+    public sealed class Exercise
     {
         public string ExerciseName { get;}
         public double CaloriesPerMinute { get;}

@@ -8,11 +8,11 @@ namespace Fitness.BL.Model
     /// </summary>
     public sealed class Meal
     {
-        public string UserName { get; }
+        public string UserName { get; set; }
         /// <summary>
         /// Time of meal taking
         /// </summary>
-        public DateTime MealTime { get; private set; }
+        public DateTime MealTime { get; set; }
         /// <summary>
         /// Keeps products and its weight from current meal
         /// </summary>
