@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Fitness.BL.Model
+﻿namespace Fitness.BL.Model
 {
     public sealed class Food
     {
@@ -9,7 +7,7 @@ namespace Fitness.BL.Model
         public double Fats { get; set; }
         public double Carbohydrates { get; set; }
         public double Calories { get; set; }
-        public Food(){ }
+        public Food() { }
         public Food(string foodName, double calories, double proteins, double fats, double carbohydrates)
         {
             FoodName = ExceptionHelper.NullOrWhiteSpaceCheck(foodName);
@@ -20,7 +18,7 @@ namespace Fitness.BL.Model
         }
         public override string ToString()
         {
-            return FoodName+" "+ Calories+"Kcal.";
+            return FoodName + " " + Calories + "Kcal.";
         }
     }
 }

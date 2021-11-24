@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Fitness.BL.Model
+﻿namespace Fitness.BL.Model
 {
     /// <summary>
     /// Gender
@@ -11,7 +9,7 @@ namespace Fitness.BL.Model
         /// <summary>
         /// Type of gender
         /// </summary>
-        public string GenderType { get;}
+        public string GenderType { get; }
         /// <summary>
         /// Create new gender.
         /// </summary>

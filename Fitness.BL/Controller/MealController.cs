@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Fitness.BL.Controller
 {
-    public class MealController:Repository
+    public class MealController : Repository
     {
         /// <summary>
         /// Filename for storing all products
@@ -18,7 +18,7 @@ namespace Fitness.BL.Controller
         /// </summary>
         public List<Food> Products { get; }
         public bool HasNewProduct { get; private set; } = false;
-        public Food CurrentProduct { get; private set;}
+        public Food CurrentProduct { get; private set; }
         /// <summary>
         /// Keeps all meals collection
         /// </summary>
@@ -73,9 +73,13 @@ namespace Fitness.BL.Controller
         /// </summary>
         public void SaveProductsMeals()
         {
-            Meals.Add(CurrentMeal);
-            SaveData(Meals, MealsFileName);
-            SaveData(Products, FoodsFileName);
+            if (CurrentMeal.Foods.Count != 0)
+            {
+                Meals.Add(CurrentMeal);
+                SaveData(Meals, MealsFileName);
+                SaveData(Products, FoodsFileName);
+            }
+
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Fitness.BL.Serialization;
-using System;
 using System.Collections.Generic;
 
 namespace Fitness.BL
@@ -19,7 +18,7 @@ namespace Fitness.BL
             return _serializer.GetData<T>(dataFileName);
         }
 
-        protected void SaveData<T>(T items,string dataFileName)
+        protected void SaveData<T>(T items, string dataFileName)
         {
             _serializer.SaveData(items, dataFileName);
         }

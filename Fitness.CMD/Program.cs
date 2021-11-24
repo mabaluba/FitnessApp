@@ -5,7 +5,7 @@ using System.Globalization;
 namespace Fitness.CMD
 {
     class Program
-    { 
+    {
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Fitness App!\nPlease, enter your Name");
@@ -24,7 +24,7 @@ namespace Fitness.CMD
                 Console.WriteLine("  P - show your meal products\n");
                 Console.WriteLine("  E - enter workout exercise\n");
                 Console.WriteLine("  W - show your workout\n");
-                Console.WriteLine("  Q - quit\n");
+                Console.WriteLine("  Q - save entered data and quit\n");
 
                 switch (Console.ReadKey().Key)
                 {

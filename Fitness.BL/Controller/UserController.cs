@@ -8,7 +8,7 @@ namespace Fitness.BL.Controller
     /// <summary>
     /// User Controller
     /// </summary>
-    public class UserController: Repository
+    public class UserController : Repository
     {
         private const string UsersFileName = "users.json";
 
@@ -38,7 +38,7 @@ namespace Fitness.BL.Controller
         {
             userName = ExceptionHelper.NullOrWhiteSpaceCheck(userName);
             Users = GetData<User>(UsersFileName).ToList();
-            CurrentUser = Users.SingleOrDefault(u => u.Name==userName);
+            CurrentUser = Users.SingleOrDefault(u => u.Name == userName);
 
             if (CurrentUser == null)
             {
@@ -60,7 +60,7 @@ namespace Fitness.BL.Controller
             CurrentUser.Weight = weight <= 0 ? throw new ArgumentException("Weight cannot be zero or less.", nameof(weight)) : weight;
             CurrentUser.Height = height <= 0 ? throw new ArgumentException("Height cannot be zero or less.", nameof(height)) : height;
             Users.Add(CurrentUser);
-            SaveData(Users,UsersFileName);
+            SaveData(Users, UsersFileName);
         }
     }
 }

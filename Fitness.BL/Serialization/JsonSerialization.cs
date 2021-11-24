@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 
 namespace Fitness.BL.Serialization
 {
@@ -11,7 +9,7 @@ namespace Fitness.BL.Serialization
     /// </summary>
     public class JsonSerialization : ISerialization
     {
-        public void SaveData<T> (T items,string fileName)
+        public void SaveData<T>(T items, string fileName)
         {
             var itemJson = JsonSerializer.Serialize(items);
             File.WriteAllText(fileName, itemJson);
@@ -25,7 +23,7 @@ namespace Fitness.BL.Serialization
                 var itemsList = JsonSerializer.Deserialize<IEnumerable<T>>(itemsStringJson);
                 return itemsList;
             }
-            catch(FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 return new List<T>();
             }

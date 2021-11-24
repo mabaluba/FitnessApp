@@ -17,15 +17,15 @@ namespace Fitness.BL.Model
         public DateTime BirthDate { get; set; }
         public double Weight { get; set; }
         public double Height { get; set; }
-        public int Age 
-        { 
-            get { return DateTime.Now.Year - BirthDate.Year; } 
+        public int Age
+        {
+            get { return DateTime.Now.Year - BirthDate.Year; }
         }
         /// <summary>
         /// This empty constructor required in net5.0 for correct json serialization
         /// </summary>
-        public User(){}
-        public User (string name)
+        public User() { }
+        public User(string name)
         {
             Name = ExceptionHelper.NullOrWhiteSpaceCheck(name);
         }
@@ -73,6 +73,6 @@ namespace Fitness.BL.Model
         //    Weight = weight <= 0 ? throw new ArgumentException("Weight cannot be zero or less.", nameof(weight)) :weight;
         //    Height =  height <= 0 ? throw new ArgumentException("Height cannot be zero or less.", nameof(height)) : height;
         //}
-        public override string ToString() => "\t"+ Name + ", " + Age + " years old";
+        public override string ToString() => "\t" + Name + ", " + Age + " years old";
     }
 }
