@@ -1,4 +1,5 @@
-﻿using Fitness.BL.Model;
+﻿using Fitness.BL.DataRepository;
+using Fitness.BL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Fitness.BL.Controller
     {
         private const string UsersFileName = "users.json";
 
-        /// <summary>
+        /// <summary> 
         /// Collection of users
         /// </summary>
         public List<User> Users { get; }
@@ -37,7 +38,7 @@ namespace Fitness.BL.Controller
         public UserController(string userName)
         {
             userName = ExceptionHelper.NullOrWhiteSpaceCheck(userName);
-            Users = GetData<User>(UsersFileName).ToList();
+            Users = GetData<User>().ToList();
             CurrentUser = Users.SingleOrDefault(u => u.Name == userName);
 
             if (CurrentUser == null)
@@ -60,7 +61,7 @@ namespace Fitness.BL.Controller
             CurrentUser.Weight = weight <= 0 ? throw new ArgumentException("Weight cannot be zero or less.", nameof(weight)) : weight;
             CurrentUser.Height = height <= 0 ? throw new ArgumentException("Height cannot be zero or less.", nameof(height)) : height;
             Users.Add(CurrentUser);
-            SaveData(Users, UsersFileName);
+            SaveData(Users);
         }
     }
 }

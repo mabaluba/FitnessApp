@@ -2,6 +2,7 @@
 {
     public sealed class Food
     {
+        public int Id { get; set; }
         public string FoodName { get; set; }
         public double Proteins { get; set; }
         public double Fats { get; set; }

@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Fitness.BL.Model
 {
     public sealed class Workout
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
-        public List<string> Exercises { get; set; }
+        [JsonInclude] [NotMapped]
+        public List<string> Exercises { get; private set; }
         public double WorkoutDuration { get; set; }
         public double CaloriesBurned { get; set; }
-
-        public DateTime WorkoutDate { get; set; }
+        [JsonInclude]
+        public DateTime WorkoutDate { get; private set; }
         public Workout() { }
         public Workout(string userName)
         {

@@ -1,4 +1,5 @@
-﻿using Fitness.BL.Model;
+﻿using Fitness.BL.DataRepository;
+using Fitness.BL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ namespace Fitness.BL.Controller
 {
     public class MealController : Repository
     {
-        /// <summary>
-        /// Filename for storing all products
-        /// </summary>
-        private const string FoodsFileName = "foods.json";
-        private const string MealsFileName = "meals.json";
+        ///// <summary>
+        ///// Filename for storing all products
+        ///// </summary>
+        //private const string FoodsFileName = "foods.json";
+        //private const string MealsFileName = "meals.json";
         private string ProductName { get; set; }
         /// <summary>
         /// Keeps all products collection
@@ -28,8 +29,8 @@ namespace Fitness.BL.Controller
         public MealController(string userName)
         {
             userName = ExceptionHelper.NullOrWhiteSpaceCheck(userName);
-            Products = GetData<Food>(FoodsFileName).ToList();
-            Meals = GetData<Meal>(MealsFileName).ToList();
+            Products = GetData<Food>().ToList();
+            Meals = GetData<Meal>().ToList();
             CurrentMeal = new Meal(userName);
         }
 
@@ -76,8 +77,8 @@ namespace Fitness.BL.Controller
             if (CurrentMeal.Foods.Count != 0)
             {
                 Meals.Add(CurrentMeal);
-                SaveData(Meals, MealsFileName);
-                SaveData(Products, FoodsFileName);
+                SaveData(Meals);
+                SaveData(Products);
             }
 
         }

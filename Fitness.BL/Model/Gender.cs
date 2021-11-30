@@ -4,12 +4,13 @@
     /// Gender
     /// </summary>
     //[Serializable]
-    public class Gender
+    public sealed class Gender
     {
+        public int Id { get; set; }
         /// <summary>
         /// Type of gender
         /// </summary>
-        public string GenderType { get; }
+        public string GenderType { get; set; }
         /// <summary>
         /// Create new gender.
         /// </summary>

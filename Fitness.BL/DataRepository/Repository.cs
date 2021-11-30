@@ -1,7 +1,7 @@
 ﻿using Fitness.BL.Serialization;
 using System.Collections.Generic;
 
-namespace Fitness.BL
+namespace Fitness.BL.DataRepository
 {
     /// <summary>
     /// Provides methods for save and get objects collection
@@ -13,14 +13,14 @@ namespace Fitness.BL
         /// </summary>
         private ISerialization _serializer = new JsonSerialization();
 
-        protected IEnumerable<T> GetData<T>(string dataFileName)
+        protected IEnumerable<T> GetData<T>() where T: class
         {
-            return _serializer.GetData<T>(dataFileName);
+            return _serializer.GetData<T>();
         }
 
-        protected void SaveData<T>(T items, string dataFileName)
+        protected void SaveData<T>(IEnumerable<T> items)
         {
-            _serializer.SaveData(items, dataFileName);
+            _serializer.SaveData(items);
         }
     }
 }

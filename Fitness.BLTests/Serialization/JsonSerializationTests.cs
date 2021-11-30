@@ -18,10 +18,10 @@ namespace Fitness.BL.Serialization.Tests
             {
                 new User { Name = userName }
             };
-            var fileName = "test.json";
+            //var fileName = "test.json";
             //Act
-            SaveData(itemsCollection, fileName);
-            var resultUserName = GetData<User>(fileName).ToList().First().Name;
+            SaveData(itemsCollection);
+            var resultUserName = GetData<User>().ToList().First().Name;
             //Assert
             Assert.AreEqual(userName, resultUserName);
         }

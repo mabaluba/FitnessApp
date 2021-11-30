@@ -9,14 +9,17 @@ namespace Fitness.BL.Serialization
     /// </summary>
     public class JsonSerialization : ISerialization
     {
-        public void SaveData<T>(T items, string fileName)
+        
+        public void SaveData<T>(IEnumerable<T> items)
         {
+            var fileName = typeof(T).Name;
             var itemJson = JsonSerializer.Serialize(items);
             File.WriteAllText(fileName, itemJson);
         }
 
-        public IEnumerable<T> GetData<T>(string fileName)
+        public IEnumerable<T> GetData<T>() where T: class
         {
+            var fileName = typeof(T).Name;
             try
             {
                 var itemsStringJson = File.ReadAllText(fileName);

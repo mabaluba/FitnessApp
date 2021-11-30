@@ -9,9 +9,11 @@ namespace Fitness.CMD
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Fitness App!\nPlease, enter your Name");
+
             var name = IsNullOrWhitespaceCheck(Console.ReadLine().ToLower());
             var userController = new UserController(CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name));
-            AddNewUser(userController);
+            AddNewUserIfNew(userController);
+
             Console.WriteLine(userController.CurrentUser);
             Console.WriteLine();
 
@@ -86,10 +88,11 @@ namespace Fitness.CMD
             }
         }
 
-        private static void AddNewUser(UserController userController)
+        private static void AddNewUserIfNew(UserController userController)
         {
             if (userController.IsNewUser)
             {
+                //userController.Users.Clear();
                 Console.WriteLine("Please, enter your gender");
                 var gender = Console.ReadLine();
                 Console.WriteLine("Please, enter your birdth date (dd.mm.yyyy)");

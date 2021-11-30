@@ -9,14 +9,14 @@ namespace Fitness.BL.Serialization
     {
         public async Task<List<T>> GetDataAsync<T>()
         {
-            using FileStream openStream = File.OpenRead("data.json");
-            var usersList = await JsonSerializer.DeserializeAsync<List<T>>(openStream);
-            return usersList;
+            using FileStream openStream = File.OpenRead("dataAsync.json");
+            return await JsonSerializer.DeserializeAsync<List<T>>(openStream);
         }
-        public async void SaveDataAsync<T>(List<T> users)
+
+        public async Task SaveDataAsync<T>(List<T> users)
         {
-            using FileStream createStream = File.Create("data.json");
-            await JsonSerializer.SerializeAsync(createStream, users);
+            using FileStream createStream = File.Create("dataAsync.json");
+            await JsonSerializer.SerializeAsync(createStream, users) ;
         }
     }
 }

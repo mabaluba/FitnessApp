@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fitness.BL.Model
 {
@@ -8,6 +9,7 @@ namespace Fitness.BL.Model
     /// </summary>
     public sealed class Meal
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
         /// <summary>
         /// Time of meal taking
@@ -16,6 +18,7 @@ namespace Fitness.BL.Model
         /// <summary>
         /// Keeps products and its weight from current meal
         /// </summary>
+        [NotMapped]
         public Dictionary<string, double> Foods { get; set; }
         /// <summary>
         /// Set Date and Time of the meal
