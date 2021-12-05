@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fitness.BL.DataRepository
 {
@@ -16,6 +17,10 @@ namespace Fitness.BL.DataRepository
             IConfigurationRoot configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true).Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBConnection"));
         }
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().Property(x => x.Id).ValueGeneratedOnAdd();
+        }*/
         public DbSet<User> Users { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Food> Foods { get; set; }

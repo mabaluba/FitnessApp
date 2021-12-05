@@ -17,7 +17,7 @@ namespace Fitness.BL.Controller.Tests
         {
             //Arrange
             var userName = Guid.NewGuid().ToString();
-            var gender = "UserControllerTest";
+            var gender = "MaleTest";
             var birthDate = DateTime.Now;
             var weight = 60;
             var height = 170;

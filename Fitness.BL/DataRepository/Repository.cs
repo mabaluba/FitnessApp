@@ -11,14 +11,14 @@ namespace Fitness.BL.DataRepository
         /// <summary>
         /// Provides serialization type
         /// </summary>
-        private ISerialization _serializer = new JsonSerialization();
+        private ISerialization _serializer = new DatabaseRepository();
 
         protected IEnumerable<T> GetData<T>() where T: class
         {
             return _serializer.GetData<T>();
         }
 
-        protected void SaveData<T>(IEnumerable<T> items)
+        protected void SaveData<T>(IEnumerable<T> items) where T : class
         {
             _serializer.SaveData(items);
         }
